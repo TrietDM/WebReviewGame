@@ -1,0 +1,48 @@
+﻿@model  List<WebReviewGame.Models.PostViewModel>
+
+    @{
+        ViewData["Title"] = "Post Manage";
+    }
+    <h3>
+        @ViewData["Title"]
+    </h3>
+<hr />
+<form>
+    <button asp-action="Create" asp-controller="Post" class="btn btn-primary">Create Post</button>
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr class="table-active">
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>@post.PostId</td>
+                        <td>@post.Title</td>
+                        <td>@post.Description</td>
+                        <td>@post.Date.ToShortDateString()</td>
+                        
+                        <td>
+                            <!-- Add action links here -->
+                            <a asp-controller="Post" asp-action="Edit" asp-route-id="@post.PostId" class="btn btn-primary">Edit</a> |
+                            <form asp-controller="Post" asp-action="Delete" asp-route-id="@post.PostId" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="6">No Post available atm.</td></tr>
+            }
+        </tbody>
+    </table>
+</form>

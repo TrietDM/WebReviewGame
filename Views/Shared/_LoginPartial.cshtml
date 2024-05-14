@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using WebReviewGame.Models.DBEnitity;
+@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+
+<ul class="navbar-nav">
+    @if (signInManager.IsSignedIn(User))
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @User.Identity!.Name
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js" integrity="sha384-kZD9w8fzzpQhdWEWqF5HY3p3F/l6Fh/waAR0mDH90KAXGm/TtfAVrKYFCR1QT5Cx" crossorigin="anonymous"></script>
+}
